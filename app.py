@@ -150,7 +150,8 @@ colon0, colon1, colon2, colon3, colon4, colon5,  = st.columns([2,1,1,1,1,2])
 
 #df['dt_obj'] = pd.to_datetime(df['dt_obj'], errors='coerce')
 
-cats = [ 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi', 'Pazar']
+#cats = [ 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi', 'Pazar']
+cats = [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 cat_type = CategoricalDtype(categories=cats, ordered=True)
 
 dort_gun = df.groupby(df["dt_obj"][120:].dt.day_name()).sum()
