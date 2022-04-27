@@ -23,6 +23,7 @@ def local_css(file_name):
 local_css("style.css")
 
 #locale.setlocale(locale.LC_ALL, "tr_TR")
+locale.setlocale(locale.LC_ALL, "en_US")
 with st.sidebar:
 
     sehir = st.radio(
@@ -222,7 +223,7 @@ st.markdown("<br>", unsafe_allow_html=True)
 colo1, colo2, colo3, colo4, colo5, colo6, colo7 = st.columns(7)
 
 uretim1 = int(yedi["Generation"][0].round(0))
-gun1= "Pazartesi"   
+gun1= "Monday"   
 durum1= weather.main(icono_df_dort["main"][:163][icono_df_dort["day"]==gun1][12:13].to_string(index=False))
 resim1 = weather.icon(icono_df_dort["icon"][:163][icono_df_dort["day"]==gun1][12:13].to_string(index=False))
 with colo1:
@@ -232,7 +233,7 @@ with colo1:
     st.markdown("<p style='text-align: center; color: black;font-size: 27px;font-weight:bold ;'>{} MWh</p>".format(uretim1), unsafe_allow_html=True)
 
 uretim2 = int(yedi["Generation"][1].round(0))
-gun2= "Salı"
+gun2= "Tuesday"
 durum2= weather.main(icono_df_dort["main"][:163][icono_df_dort["day"]==gun2][12:13].to_string(index=False))
 resim2 = weather.icon(icono_df_dort["icon"][:163][icono_df_dort["day"]==gun2][12:13].to_string(index=False))
 with colo2:
@@ -242,7 +243,7 @@ with colo2:
     st.markdown("<p style='text-align: center; color: black;font-size: 27px;font-weight:bold ;'>{} MWh</p>".format(uretim2), unsafe_allow_html=True)
 
 uretim3 = int(yedi["Generation"][2].round(0))
-gun3= "Çarşamba"
+gun3= "Wednesday"
 durum3= weather.main(icono_df_dort["main"][:163][icono_df_dort["day"]==gun3][12:13].to_string(index=False))
 resim3 = weather.icon(icono_df_dort["icon"][:163][icono_df_dort["day"]==gun3][12:13].to_string(index=False))
 with colo3:
@@ -252,7 +253,7 @@ with colo3:
     st.markdown("<p style='text-align: center; color: black;font-size: 27px;font-weight:bold ;'>{} MWh</p>".format(uretim3), unsafe_allow_html=True)
 
 uretim4 = int(yedi["Generation"][3].round(0))
-gun4= "Perşembe"
+gun4= "Thursday"
 durum4= weather.main(icono_df_dort["main"][:163][icono_df_dort["day"]==gun4][12:13].to_string(index=False))
 resim4 = weather.icon(icono_df_dort["icon"][:163][icono_df_dort["day"]==gun4][12:13].to_string(index=False))
 with colo4:
@@ -262,7 +263,7 @@ with colo4:
     st.markdown("<p style='text-align: center; color: black;font-size: 27px;font-weight:bold ;'>{} MWh</p>".format(uretim4), unsafe_allow_html=True)
 
 uretim5 = int(yedi["Generation"][4].round(0))
-gun5= "Cuma"
+gun5= "Friday"
 durum5= weather.main(icono_df_dort["main"][:163][icono_df_dort["day"]==gun5][12:13].to_string(index=False))
 resim5 = weather.icon(icono_df_dort["icon"][:163][icono_df_dort["day"]==gun5][12:13].to_string(index=False))
 with colo5:
@@ -272,7 +273,7 @@ with colo5:
     st.markdown("<p style='text-align: center; color: black;font-size: 27px;font-weight:bold ;'>{} MWh</p>".format(uretim5), unsafe_allow_html=True)
 
 uretim6 = int(yedi["Generation"][5].round(0))
-gun6= "Cumartesi"
+gun6= "Saturday"
 durum6= weather.main(icono_df_dort["main"][:163][icono_df_dort["day"]==gun6][12:13].to_string(index=False))
 resim6 = weather.icon(icono_df_dort["icon"][:163][icono_df_dort["day"]==gun6][12:13].to_string(index=False))
 with colo6:
@@ -282,7 +283,7 @@ with colo6:
     st.markdown("<p style='text-align: center; color: black;font-size: 27px;font-weight:bold ;'>{} MWh</p>".format(uretim6), unsafe_allow_html=True)
 
 uretim7 = int(yedi["Generation"][6].round(0))
-gun7= "Pazar"
+gun7= "Sunday"
 durum7= weather.main(icono_df_dort["main"][:163][icono_df_dort["day"]==gun7][12:13].to_string(index=False))
 resim7 = weather.icon(icono_df_dort["icon"][:163][icono_df_dort["day"]==gun7][12:13].to_string(index=False))
 with colo7:
