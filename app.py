@@ -22,7 +22,7 @@ def local_css(file_name):
 
 local_css("style.css")
 
-
+locale.setlocale(locale.LC_ALL, "tr_TR")
 with st.sidebar:
 
     sehir = st.radio(
