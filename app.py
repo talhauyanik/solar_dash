@@ -22,7 +22,7 @@ def local_css(file_name):
 
 local_css("style.css")
 
-locale.setlocale(locale.LC_ALL, "tr_TR")
+#locale.setlocale(locale.LC_ALL, "tr_TR")
 with st.sidebar:
 
     sehir = st.radio(
@@ -153,7 +153,7 @@ colon0, colon1, colon2, colon3, colon4, colon5,  = st.columns([2,1,1,1,1,2])
 cats = [ 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi', 'Pazar']
 cat_type = CategoricalDtype(categories=cats, ordered=True)
 
-dort_gun = df.groupby(df["dt_obj"][120:].dt.day_name(locale = 'Turkish')).sum()
+dort_gun = df.groupby(df["dt_obj"][120:].dt.day_name().sum()
 dort = dort_gun.reset_index()
 dort['dt_obj'] = dort['dt_obj'].astype(cat_type)
 dort_g = dort.sort_values(by="dt_obj").reset_index(drop=True)

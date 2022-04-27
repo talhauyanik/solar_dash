@@ -69,7 +69,7 @@ def cevir(sehir_ad,lat,lon):
 
     icono_df = pd.concat([iconh_df, icon_df]).reset_index()
     icono_df["date"] = pd.to_datetime(icono_df["date"])
-    icono_df["day"] = pd.to_datetime(icono_df.date).dt.day_name(locale = 'Turkish')
+    icono_df["day"] = pd.to_datetime(icono_df.date).dt.day_name()
 
 
     return icono_df
