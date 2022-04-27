@@ -38,7 +38,7 @@ caching = true
 
 # If false, makes your Streamlit script not draw to a Streamlit app.
 # Default: true
-displayEnabled = true
+displayEnabled = false
 
 # Controls whether uncaught app exceptions are displayed in the browser. By default, this is set to True and Streamlit displays app exceptions and associated tracebacks in the browser.
 # If set to False, an exception will result in a generic message being shown in the browser, and exceptions and tracebacks will be printed to the console only.
@@ -189,6 +189,6 @@ showPyplotGlobalUse = true
 base ="light"
 textColor = '#31333F'
 primaryColor = "#ec6e4c"
-backgroundColor = "#FFFFFF"
+backgroundColor = "#ec6e4cF"
 secondaryBackgroundColor = "#F0F2F6"
 font = "serif"
