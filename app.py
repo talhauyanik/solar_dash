@@ -146,7 +146,7 @@ tahmin_title_1gun = (datetime.date.today() - datetime.timedelta(days=0)).strftim
 tahmin_title_1ay = (datetime.date.today() - datetime.timedelta(days=0)).strftime("%B")
 tahmin_title_2gun = (datetime.date.today() + datetime.timedelta(days=3)).strftime("%d")
 tahmin_title_2ay = (datetime.date.today() + datetime.timedelta(days=3)).strftime("%B")
-st.markdown("<p style='text-align: center; color: #31333f;font-size: 2.25rem;font-weight:bold ;'>4 Günlük Tahmini Üretim ("+tahmin_title_1gun+" "+str(weather.cevir(tahmin_title_1ay))+" - "+tahmin_title_1gun+" "+str(weather.cevir(tahmin_title_2ay))+")</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #31333f;font-size: 2.25rem;font-weight:bold ;'>4 Günlük Tahmini Üretim ("+tahmin_title_1gun+" "+str(weather.aycevir(tahmin_title_1ay))+" - "+tahmin_title_1gun+" "+str(weather.aycevir(tahmin_title_2ay))+")</p>", unsafe_allow_html=True)
 st.markdown("<br>", unsafe_allow_html=True)
 
 colon0, colon1, colon2, colon3, colon4, colon5,  = st.columns([2,1,1,1,1,2])
@@ -215,10 +215,12 @@ with colon4:
 
 
 ######################################################
-son_7_title1 = (datetime.date.today() - datetime.timedelta(days=6)).strftime("%d %B")
-son_7_title2 = (datetime.date.today() - datetime.timedelta(days=0)).strftime("%d %B")
+son_7_title1gun = (datetime.date.today() - datetime.timedelta(days=6)).strftime("%d")
+son_7_title1ay = (datetime.date.today() - datetime.timedelta(days=6)).strftime("%B")
+son_7_title2gun = (datetime.date.today() - datetime.timedelta(days=0)).strftime("%d")
+son_7_title2ay = (datetime.date.today() - datetime.timedelta(days=0)).strftime("%B")
 st.markdown("<br><br><br>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; color: #31333f;font-size: 2.25rem;font-weight:bold ;'>Son 7 Gün Üretim ("+str(weather.cevir(son_7_title1))+" - "+str(weather.cevir(son_7_title2))+")</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #31333f;font-size: 2.25rem;font-weight:bold ;'>Son 7 Gün Üretim ("+son_7_title1gun+" "+str(weather.aycevir(son_7_title1ay))+" - "+son_7_title2gun+" "+str(weather.aycevir(son_7_title2ay))+")</p>", unsafe_allow_html=True)
 st.markdown("<br>", unsafe_allow_html=True)
 
 

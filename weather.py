@@ -461,3 +461,30 @@ def cevir(gun):
         return "Cumartesi"
     elif gun == "Sunday":
         return "Pazar"
+
+def aycevir(ay):
+    
+    if ay == "January":
+        return "Ocak"
+    elif ay == "February":
+        return "Şubat"
+    elif ay == "March":
+        return "Mart"
+    elif ay == "April":
+        return "Nisan"
+    elif ay == "May":
+        return "Mayıs"
+    elif ay == "June":
+        return "Haziran"
+    elif ay == "July":
+        return "Temmuz"
+    elif ay == "August":
+        return "Ağustos"
+    elif ay == "September":
+        return "Eylül"
+    elif ay == "October":
+        return "Ekim"
+    elif ay == "November":
+        return "Kasım"
+    elif ay == "December":
+        return "Aralık"    
