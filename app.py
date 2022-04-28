@@ -142,7 +142,8 @@ with col4:
 
 st.markdown("<br><br><br>", unsafe_allow_html=True)
 
-tahmin_title_1 = (datetime.date.today() - datetime.timedelta(days=0)).strftime("%d %B")
+tahmin_title_1gun = (datetime.date.today() - datetime.timedelta(days=0)).strftime("%d %B")
+tahmin_title_1gun = (datetime.date.today() - datetime.timedelta(days=0)).strftime("%d %B")
 tahmin_title_2 = (datetime.date.today() + datetime.timedelta(days=3)).strftime("%d %B")
 st.markdown("<p style='text-align: center; color: #31333f;font-size: 2.25rem;font-weight:bold ;'>4 Günlük Tahmini Üretim ("+str(weather.cevir(tahmin_title_1))+" - "+str(weather.cevir(tahmin_title_2))+")</p>", unsafe_allow_html=True)
 st.markdown("<br>", unsafe_allow_html=True)
@@ -176,7 +177,7 @@ with colon1:
     st.markdown("<p style='text-align: center; color: black;font-size: 27px;font-weight:bold ;'>{} MWh</p>".format(uretim_tahmin1), unsafe_allow_html=True)
 
 gun_tahmin2 = weather.cevir((datetime.date.today() + datetime.timedelta(days=1)).strftime("%A"))
-gun_tahmin2en = (datetime.date.today() + datetime.timedelta(days=0)).strftime("%A")
+gun_tahmin2en = (datetime.date.today() + datetime.timedelta(days=1)).strftime("%A")
 uretim_tahmin2 = int(dort_g["Generation"][dort_g["dt_obj"]==gun_tahmin2en])
 durum_tahmin2= weather.main(icono_df_dort["main"][120:][icono_df_dort["day"]==gun_tahmin2en][12:13].to_string(index=False))
 resim_tahmin2 = weather.icon(icono_df_dort["icon"][120:][icono_df_dort["day"]==gun_tahmin2en][12:13].to_string(index=False))
@@ -187,7 +188,7 @@ with colon2:
     st.markdown("<p style='text-align: center; color: black;font-size: 27px;font-weight:bold ;'>{} MWh</p>".format(uretim_tahmin2), unsafe_allow_html=True)
 
 gun_tahmin3 = weather.cevir((datetime.date.today() + datetime.timedelta(days=2)).strftime("%A"))
-gun_tahmin3en = (datetime.date.today() + datetime.timedelta(days=0)).strftime("%A") 
+gun_tahmin3en = (datetime.date.today() + datetime.timedelta(days=2)).strftime("%A") 
 uretim_tahmin3 = int(dort_g["Generation"][dort_g["dt_obj"]==gun_tahmin3en])
 durum_tahmin3= weather.main(icono_df_dort["main"][120:][icono_df_dort["day"]==gun_tahmin3en][12:13].to_string(index=False))
 resim_tahmin3 = weather.icon(icono_df_dort["icon"][120:][icono_df_dort["day"]==gun_tahmin3en][12:13].to_string(index=False))
@@ -198,7 +199,7 @@ with colon3:
     st.markdown("<p style='text-align: center; color: black;font-size: 27px;font-weight:bold ;'>{} MWh</p>".format(uretim_tahmin3), unsafe_allow_html=True)
 
 gun_tahmin4 = weather.cevir((datetime.date.today() + datetime.timedelta(days=3)).strftime("%A"))
-gun_tahmin4en = (datetime.date.today() + datetime.timedelta(days=0)).strftime("%A")
+gun_tahmin4en = (datetime.date.today() + datetime.timedelta(days=3)).strftime("%A")
 uretim_tahmin4 = int(dort_g["Generation"][dort_g["dt_obj"]==gun_tahmin4en])
 durum_tahmin4= weather.main(icono_df_dort["main"][120:][icono_df_dort["day"]==gun_tahmin4en][12:13].to_string(index=False))
 resim_tahmin4 = weather.icon(icono_df_dort["icon"][120:][icono_df_dort["day"]==gun_tahmin4en][12:13].to_string(index=False))
