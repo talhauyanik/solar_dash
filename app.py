@@ -348,8 +348,7 @@ fig.update_layout(
     xaxis_tickangle=0,
     xaxis_title='Aylar',
     yaxis_title='Üretim (MWh)',
-    height=500,
-    width=1100, 
+    
     title=dict(
         text='<b>Aylık Üretim (MWh)</b>',
         x=0.5,
@@ -360,7 +359,7 @@ fig.update_layout(
             color='#31333f'
         ))
         ,uniformtext_minsize=35)
-st.plotly_chart(fig)
+st.plotly_chart(fig,use_container_width=True)
 
 
 
@@ -387,8 +386,7 @@ fig2.update_layout(
     xaxis_tickmode="linear", 
     xaxis_title='Günler',
     yaxis_title='Üretim (MWh)',
-    height=500,
-    width=1100, 
+    
     title=dict(
         text='<b>Günlük Üretim (MWh)</b>',
         x=0.5,
@@ -407,7 +405,7 @@ fig2.update_layout(
     x=1
 ))
 
-st.plotly_chart(fig2)
+st.plotly_chart(fig2,use_container_width=True)
 
 
 st.markdown("""
