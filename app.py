@@ -165,9 +165,10 @@ dort_g = dort.sort_values(by="dt_obj").reset_index(drop=True)
 
 
 gun_tahmin1 = weather.cevir((datetime.date.today() + datetime.timedelta(days=0)).strftime("%A"))
-uretim_tahmin1 = int(dort_g["Generation"][dort_g["dt_obj"]=="Friday"])
-durum_tahmin1= weather.main(icono_df_dort["main"][120:][icono_df_dort["day"]==gun_tahmin1][12:13].to_string(index=False))
-resim_tahmin1 = weather.icon(icono_df_dort["icon"][120:][icono_df_dort["day"]==gun_tahmin1][12:13].to_string(index=False))
+gun_tahmin1en = (datetime.date.today() + datetime.timedelta(days=0)).strftime("%A")
+uretim_tahmin1 = int(dort_g["Generation"][dort_g["dt_obj"]==gun_tahmin1en])
+durum_tahmin1= weather.main(icono_df_dort["main"][120:][icono_df_dort["day"]==gun_tahmin1en][12:13].to_string(index=False))
+resim_tahmin1 = weather.icon(icono_df_dort["icon"][120:][icono_df_dort["day"]==gun_tahmin1en][12:13].to_string(index=False))
 with colon1:
     st.markdown("<p style='text-align: center; color: #ec6e4c;background-color:#f2f2f2;font-size: 20px;font-weight:bold ;'>{}</p>".format(gun_tahmin1), unsafe_allow_html=True)
     image = Image.open('images/'+resim_tahmin1+'.png')
@@ -175,19 +176,21 @@ with colon1:
     st.markdown("<p style='text-align: center; color: black;font-size: 27px;font-weight:bold ;'>{} MWh</p>".format(uretim_tahmin1), unsafe_allow_html=True)
 
 gun_tahmin2 = weather.cevir((datetime.date.today() + datetime.timedelta(days=1)).strftime("%A"))
-uretim_tahmin2 = int(dort_g["Generation"][dort_g["dt_obj"]==gun_tahmin2])
-durum_tahmin2= weather.main(icono_df_dort["main"][120:][icono_df_dort["day"]==gun_tahmin2][12:13].to_string(index=False))
-resim_tahmin2 = weather.icon(icono_df_dort["icon"][120:][icono_df_dort["day"]==gun_tahmin2][12:13].to_string(index=False))
+gun_tahmin2en = (datetime.date.today() + datetime.timedelta(days=0)).strftime("%A")
+uretim_tahmin2 = int(dort_g["Generation"][dort_g["dt_obj"]==gun_tahmin2en])
+durum_tahmin2= weather.main(icono_df_dort["main"][120:][icono_df_dort["day"]==gun_tahmin2en][12:13].to_string(index=False))
+resim_tahmin2 = weather.icon(icono_df_dort["icon"][120:][icono_df_dort["day"]==gun_tahmin2en][12:13].to_string(index=False))
 with colon2:
     st.markdown("<p style='text-align: center; color: #ec6e4c;background-color:#f2f2f2;font-size: 20px;font-weight:bold ;'>{}</p>".format(gun_tahmin2), unsafe_allow_html=True)
     image = Image.open('images/'+resim_tahmin2+'.png')
     st.image(image,use_column_width=True,caption="{}".format(durum_tahmin2))
     st.markdown("<p style='text-align: center; color: black;font-size: 27px;font-weight:bold ;'>{} MWh</p>".format(uretim_tahmin2), unsafe_allow_html=True)
 
-gun_tahmin3 = weather.cevir((datetime.date.today() + datetime.timedelta(days=2)).strftime("%A")) ####fonksiyon issimleri weather cevir yazılacak
-uretim_tahmin3 = int(dort_g["Generation"][dort_g["dt_obj"]==gun_tahmin3])
-durum_tahmin3= weather.main(icono_df_dort["main"][120:][icono_df_dort["day"]==gun_tahmin3][12:13].to_string(index=False))
-resim_tahmin3 = weather.icon(icono_df_dort["icon"][120:][icono_df_dort["day"]==gun_tahmin3][12:13].to_string(index=False))
+gun_tahmin3 = weather.cevir((datetime.date.today() + datetime.timedelta(days=2)).strftime("%A"))
+gun_tahmin3en = (datetime.date.today() + datetime.timedelta(days=0)).strftime("%A") 
+uretim_tahmin3 = int(dort_g["Generation"][dort_g["dt_obj"]==gun_tahmin3en])
+durum_tahmin3= weather.main(icono_df_dort["main"][120:][icono_df_dort["day"]==gun_tahmin3en][12:13].to_string(index=False))
+resim_tahmin3 = weather.icon(icono_df_dort["icon"][120:][icono_df_dort["day"]==gun_tahmin3en][12:13].to_string(index=False))
 with colon3:
     st.markdown("<p style='text-align: center; color: #ec6e4c;background-color:#f2f2f2;font-size: 20px;font-weight:bold ;'>{}</p>".format(gun_tahmin3), unsafe_allow_html=True)
     image = Image.open('images/'+resim_tahmin3+'.png')
@@ -195,9 +198,10 @@ with colon3:
     st.markdown("<p style='text-align: center; color: black;font-size: 27px;font-weight:bold ;'>{} MWh</p>".format(uretim_tahmin3), unsafe_allow_html=True)
 
 gun_tahmin4 = weather.cevir((datetime.date.today() + datetime.timedelta(days=3)).strftime("%A"))
-uretim_tahmin4 = int(dort_g["Generation"][dort_g["dt_obj"]==gun_tahmin4])
-durum_tahmin4= weather.main(icono_df_dort["main"][120:][icono_df_dort["day"]==gun_tahmin4][12:13].to_string(index=False))
-resim_tahmin4 = weather.icon(icono_df_dort["icon"][120:][icono_df_dort["day"]==gun_tahmin4][12:13].to_string(index=False))
+gun_tahmin4en = (datetime.date.today() + datetime.timedelta(days=0)).strftime("%A")
+uretim_tahmin4 = int(dort_g["Generation"][dort_g["dt_obj"]==gun_tahmin4en])
+durum_tahmin4= weather.main(icono_df_dort["main"][120:][icono_df_dort["day"]==gun_tahmin4en][12:13].to_string(index=False))
+resim_tahmin4 = weather.icon(icono_df_dort["icon"][120:][icono_df_dort["day"]==gun_tahmin4en][12:13].to_string(index=False))
 with colon4:
     st.markdown("<p style='text-align: center; color: #ec6e4c;background-color:#f2f2f2;font-size: 20px;font-weight:bold ;'>{}</p>".format(gun_tahmin4), unsafe_allow_html=True)
     image = Image.open('images/'+resim_tahmin4+'.png')
