@@ -22,7 +22,7 @@ def local_css(file_name):
 
 local_css("style.css")
 
-locale.setlocale(locale.LC_TIME, "en_US")
+locale.setlocale(locale.LC_ALL, "en_US")
 
 with st.sidebar:
 
