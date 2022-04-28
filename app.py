@@ -144,7 +144,7 @@ st.markdown("<br><br><br>", unsafe_allow_html=True)
 
 tahmin_title_1 = (datetime.date.today() - datetime.timedelta(days=0)).strftime("%d %B")
 tahmin_title_2 = (datetime.date.today() + datetime.timedelta(days=3)).strftime("%d %B")
-st.markdown("<p style='text-align: center; color: #31333f;font-size: 2.25rem;font-weight:bold ;'>4 Günlük Tahmini Üretim ("+weather.cevir(tahmin_title_1)+" - "+weather.cevir(tahmin_title_2)+")</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #31333f;font-size: 2.25rem;font-weight:bold ;'>4 Günlük Tahmini Üretim ("+str(weather.cevir(tahmin_title_1))+" - "+str(weather.cevir(tahmin_title_2))+")</p>", unsafe_allow_html=True)
 st.markdown("<br>", unsafe_allow_html=True)
 
 colon0, colon1, colon2, colon3, colon4, colon5,  = st.columns([2,1,1,1,1,2])
@@ -194,7 +194,7 @@ with colon3:
     st.image(image,use_column_width=True,caption="{}".format(durum_tahmin3))
     st.markdown("<p style='text-align: center; color: black;font-size: 27px;font-weight:bold ;'>{} MWh</p>".format(uretim_tahmin3), unsafe_allow_html=True)
 
-gun_tahmin4 = (datetime.date.today() + datetime.timedelta(days=3)).strftime("%A")
+gun_tahmin4 = weather.cevir((datetime.date.today() + datetime.timedelta(days=3)).strftime("%A"))
 uretim_tahmin4 = int(dort_g["Generation"][dort_g["dt_obj"]==gun_tahmin4])
 durum_tahmin4= weather.main(icono_df_dort["main"][120:][icono_df_dort["day"]==gun_tahmin4][12:13].to_string(index=False))
 resim_tahmin4 = weather.icon(icono_df_dort["icon"][120:][icono_df_dort["day"]==gun_tahmin4][12:13].to_string(index=False))
@@ -212,7 +212,7 @@ with colon4:
 son_7_title1 = (datetime.date.today() - datetime.timedelta(days=6)).strftime("%d %B")
 son_7_title2 = (datetime.date.today() - datetime.timedelta(days=0)).strftime("%d %B")
 st.markdown("<br><br><br>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; color: #31333f;font-size: 2.25rem;font-weight:bold ;'>Son 7 Gün Üretim ("+weather.cevir(son_7_title1)+" - "+weather.cevir(son_7_title2)+")</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #31333f;font-size: 2.25rem;font-weight:bold ;'>Son 7 Gün Üretim ("+str(weather.cevir(son_7_title1))+" - "+str(weather.cevir(son_7_title2))+")</p>", unsafe_allow_html=True)
 st.markdown("<br>", unsafe_allow_html=True)
 
 
