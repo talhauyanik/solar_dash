@@ -165,7 +165,7 @@ dort_g = dort.sort_values(by="dt_obj").reset_index(drop=True)
 
 
 gun_tahmin1 = weather.cevir((datetime.date.today() + datetime.timedelta(days=0)).strftime("%A"))
-uretim_tahmin1 = int(dort_g["Generation"][dort_g["dt_obj"]==gun_tahmin1])
+uretim_tahmin1 = int(dort_g["Generation"][dort_g["dt_obj"]=="Friday"])
 durum_tahmin1= weather.main(icono_df_dort["main"][120:][icono_df_dort["day"]==gun_tahmin1][12:13].to_string(index=False))
 resim_tahmin1 = weather.icon(icono_df_dort["icon"][120:][icono_df_dort["day"]==gun_tahmin1][12:13].to_string(index=False))
 with colon1:
