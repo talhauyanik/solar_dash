@@ -22,7 +22,7 @@ def local_css(file_name):
 
 local_css("style.css")
 
-locale.setlocale(locale.LC_ALL, "tr_TR")
+locale.setlocale(locale.LC_TIME, "tr_TR")
 
 with st.sidebar:
 
@@ -164,7 +164,7 @@ dort_g = dort.sort_values(by="dt_obj").reset_index(drop=True)
 
 
 
-gun_tahmin1 = str(weather.cevir((datetime.date.today() + datetime.timedelta(days=0)).strftime("%A")))
+gun_tahmin1 = weather.cevir((datetime.date.today() + datetime.timedelta(days=0)).strftime("%A"))
 uretim_tahmin1 = int(dort_g["Generation"][dort_g["dt_obj"]==gun_tahmin1])
 durum_tahmin1= weather.main(icono_df_dort["main"][120:][icono_df_dort["day"]==gun_tahmin1][12:13].to_string(index=False))
 resim_tahmin1 = weather.icon(icono_df_dort["icon"][120:][icono_df_dort["day"]==gun_tahmin1][12:13].to_string(index=False))
