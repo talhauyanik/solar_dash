@@ -144,18 +144,18 @@ st.markdown("<br><br><br>", unsafe_allow_html=True)
 
 tahmin_title_1 = (datetime.date.today() - datetime.timedelta(days=0)).strftime("%d %B")
 tahmin_title_2 = (datetime.date.today() + datetime.timedelta(days=3)).strftime("%d %B")
-st.markdown("<p style='text-align: center; color: #31333f;font-size: 2.25rem;font-weight:bold ;'>4 Günlük Tahmini Üretim ("+tahmin_title_1+" - "+tahmin_title_2+")</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #31333f;font-size: 2.25rem;font-weight:bold ;'>4 Günlük Tahmini Üretim ("+weather.cevir(tahmin_title_1)+" - "+weather.cevir(tahmin_title_2)+")</p>", unsafe_allow_html=True)
 st.markdown("<br>", unsafe_allow_html=True)
 
 colon0, colon1, colon2, colon3, colon4, colon5,  = st.columns([2,1,1,1,1,2])
 
 #df['dt_obj'] = pd.to_datetime(df['dt_obj'], errors='coerce')
 
-cats = [ 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi', 'Pazar']
-#cats = [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+#cats = [ 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi', 'Pazar']
+cats = [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 cat_type = CategoricalDtype(categories=cats, ordered=True)
 
-dort_gun = df.groupby(df["dt_obj"][120:].dt.day_name(locale = "Turkish")).sum()
+dort_gun = df.groupby(df["dt_obj"][120:].dt.day_name()).sum()
 dort = dort_gun.reset_index()
 dort['dt_obj'] = dort['dt_obj'].astype(cat_type)
 dort_g = dort.sort_values(by="dt_obj").reset_index(drop=True)
@@ -164,7 +164,7 @@ dort_g = dort.sort_values(by="dt_obj").reset_index(drop=True)
 
 
 
-gun_tahmin1 = (datetime.date.today() + datetime.timedelta(days=0)).strftime("%A")
+gun_tahmin1 = weather.cevir((datetime.date.today() + datetime.timedelta(days=0)).strftime("%A"))
 uretim_tahmin1 = int(dort_g["Generation"][dort_g["dt_obj"]==gun_tahmin1])
 durum_tahmin1= weather.main(icono_df_dort["main"][120:][icono_df_dort["day"]==gun_tahmin1][12:13].to_string(index=False))
 resim_tahmin1 = weather.icon(icono_df_dort["icon"][120:][icono_df_dort["day"]==gun_tahmin1][12:13].to_string(index=False))
@@ -174,7 +174,7 @@ with colon1:
     st.image(image,use_column_width=True,caption="{}".format(durum_tahmin1))
     st.markdown("<p style='text-align: center; color: black;font-size: 27px;font-weight:bold ;'>{} MWh</p>".format(uretim_tahmin1), unsafe_allow_html=True)
 
-gun_tahmin2 = (datetime.date.today() + datetime.timedelta(days=1)).strftime("%A")
+gun_tahmin2 = weather.cevir((datetime.date.today() + datetime.timedelta(days=1)).strftime("%A"))
 uretim_tahmin2 = int(dort_g["Generation"][dort_g["dt_obj"]==gun_tahmin2])
 durum_tahmin2= weather.main(icono_df_dort["main"][120:][icono_df_dort["day"]==gun_tahmin2][12:13].to_string(index=False))
 resim_tahmin2 = weather.icon(icono_df_dort["icon"][120:][icono_df_dort["day"]==gun_tahmin2][12:13].to_string(index=False))
@@ -184,7 +184,7 @@ with colon2:
     st.image(image,use_column_width=True,caption="{}".format(durum_tahmin2))
     st.markdown("<p style='text-align: center; color: black;font-size: 27px;font-weight:bold ;'>{} MWh</p>".format(uretim_tahmin2), unsafe_allow_html=True)
 
-gun_tahmin3 = (datetime.date.today() + datetime.timedelta(days=2)).strftime("%A")
+gun_tahmin3 = weather.cevir((datetime.date.today() + datetime.timedelta(days=2)).strftime("%A")) ####fonksiyon issimleri weather cevir yazılacak
 uretim_tahmin3 = int(dort_g["Generation"][dort_g["dt_obj"]==gun_tahmin3])
 durum_tahmin3= weather.main(icono_df_dort["main"][120:][icono_df_dort["day"]==gun_tahmin3][12:13].to_string(index=False))
 resim_tahmin3 = weather.icon(icono_df_dort["icon"][120:][icono_df_dort["day"]==gun_tahmin3][12:13].to_string(index=False))
@@ -208,13 +208,11 @@ with colon4:
 
 
 
-
-
 ######################################################
 son_7_title1 = (datetime.date.today() - datetime.timedelta(days=6)).strftime("%d %B")
 son_7_title2 = (datetime.date.today() - datetime.timedelta(days=0)).strftime("%d %B")
 st.markdown("<br><br><br>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; color: #31333f;font-size: 2.25rem;font-weight:bold ;'>Son 7 Gün Üretim ("+son_7_title1+" - "+son_7_title2+")</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #31333f;font-size: 2.25rem;font-weight:bold ;'>Son 7 Gün Üretim ("+weather.cevir(son_7_title1)+" - "+weather.cevir(son_7_title2)+")</p>", unsafe_allow_html=True)
 st.markdown("<br>", unsafe_allow_html=True)
 
 
@@ -223,10 +221,10 @@ st.markdown("<br>", unsafe_allow_html=True)
 colo1, colo2, colo3, colo4, colo5, colo6, colo7 = st.columns(7)
 
 uretim1 = int(yedi["Generation"][0].round(0))
+gun1en= "Monday" 
 gun1= "Pazartesi"   
-#gun1= "Monday"   
-durum1= weather.main(icono_df_dort["main"][:163][icono_df_dort["day"]==gun1][12:13].to_string(index=False))
-resim1 = weather.icon(icono_df_dort["icon"][:163][icono_df_dort["day"]==gun1][12:13].to_string(index=False))
+durum1= weather.main(icono_df_dort["main"][:163][icono_df_dort["day"]==gun1en][12:13].to_string(index=False))
+resim1 = weather.icon(icono_df_dort["icon"][:163][icono_df_dort["day"]==gun1en][12:13].to_string(index=False))
 with colo1:
     st.markdown("<p style='text-align: center; color: #ec6e4c;background-color:#f2f2f2;font-size: 20px;font-weight:bold ;'>{}</p>".format(gun1), unsafe_allow_html=True)
     image = Image.open('images/'+resim1+'.png')
@@ -234,10 +232,10 @@ with colo1:
     st.markdown("<p style='text-align: center; color: black;font-size: 27px;font-weight:bold ;'>{} MWh</p>".format(uretim1), unsafe_allow_html=True)
 
 uretim2 = int(yedi["Generation"][1].round(0))
-#gun2= "Tuesday"   
+gun2en= "Tuesday"   
 gun2= "Salı"
-durum2= weather.main(icono_df_dort["main"][:163][icono_df_dort["day"]==gun2][12:13].to_string(index=False))
-resim2 = weather.icon(icono_df_dort["icon"][:163][icono_df_dort["day"]==gun2][12:13].to_string(index=False))
+durum2= weather.main(icono_df_dort["main"][:163][icono_df_dort["day"]==gun2en][12:13].to_string(index=False))
+resim2 = weather.icon(icono_df_dort["icon"][:163][icono_df_dort["day"]==gun2en][12:13].to_string(index=False))
 with colo2:
     st.markdown("<p style='text-align: center; color: #ec6e4c;background-color:#f2f2f2;font-size: 20px;font-weight:bold ;'>{}</p>".format(gun2), unsafe_allow_html=True)
     image = Image.open('images/'+resim2+'.png')
@@ -245,10 +243,10 @@ with colo2:
     st.markdown("<p style='text-align: center; color: black;font-size: 27px;font-weight:bold ;'>{} MWh</p>".format(uretim2), unsafe_allow_html=True)
 
 uretim3 = int(yedi["Generation"][2].round(0))
-#gun3= "Wednesday"
+gun3en= "Wednesday"
 gun3= "Çarşamba"
-durum3= weather.main(icono_df_dort["main"][:163][icono_df_dort["day"]==gun3][12:13].to_string(index=False))
-resim3 = weather.icon(icono_df_dort["icon"][:163][icono_df_dort["day"]==gun3][12:13].to_string(index=False))
+durum3= weather.main(icono_df_dort["main"][:163][icono_df_dort["day"]==gun3en][12:13].to_string(index=False))
+resim3 = weather.icon(icono_df_dort["icon"][:163][icono_df_dort["day"]==gun3en][12:13].to_string(index=False))
 with colo3:
     st.markdown("<p style='text-align: center; color: #ec6e4c;background-color:#f2f2f2;font-size: 20px;font-weight:bold ;'>{}</p>".format(gun3), unsafe_allow_html=True)
     image = Image.open('images/'+resim3+'.png')
@@ -256,10 +254,10 @@ with colo3:
     st.markdown("<p style='text-align: center; color: black;font-size: 27px;font-weight:bold ;'>{} MWh</p>".format(uretim3), unsafe_allow_html=True)
 
 uretim4 = int(yedi["Generation"][3].round(0))
-#gun4= "Thursday"
+gun4en= "Thursday"
 gun4= "Perşembe"
-durum4= weather.main(icono_df_dort["main"][:163][icono_df_dort["day"]==gun4][12:13].to_string(index=False))
-resim4 = weather.icon(icono_df_dort["icon"][:163][icono_df_dort["day"]==gun4][12:13].to_string(index=False))
+durum4= weather.main(icono_df_dort["main"][:163][icono_df_dort["day"]==gun4en][12:13].to_string(index=False))
+resim4 = weather.icon(icono_df_dort["icon"][:163][icono_df_dort["day"]==gun4en][12:13].to_string(index=False))
 with colo4:
     st.markdown("<p style='text-align: center; color: #ec6e4c;background-color:#f2f2f2;font-size: 20px;font-weight:bold ;'>{}</p>".format(gun4), unsafe_allow_html=True)
     image = Image.open('images/'+resim4+'.png')
@@ -267,10 +265,10 @@ with colo4:
     st.markdown("<p style='text-align: center; color: black;font-size: 27px;font-weight:bold ;'>{} MWh</p>".format(uretim4), unsafe_allow_html=True)
 
 uretim5 = int(yedi["Generation"][4].round(0))
-#gun5= "Friday"
+gun5en= "Friday"
 gun5= "Cuma"
-durum5= weather.main(icono_df_dort["main"][:163][icono_df_dort["day"]==gun5][12:13].to_string(index=False))
-resim5 = weather.icon(icono_df_dort["icon"][:163][icono_df_dort["day"]==gun5][12:13].to_string(index=False))
+durum5= weather.main(icono_df_dort["main"][:163][icono_df_dort["day"]==gun5en][12:13].to_string(index=False))
+resim5 = weather.icon(icono_df_dort["icon"][:163][icono_df_dort["day"]==gun5en][12:13].to_string(index=False))
 with colo5:
     st.markdown("<p style='text-align: center; color: #ec6e4c;background-color:#f2f2f2;font-size: 20px;font-weight:bold ;'>{}</p>".format(gun5), unsafe_allow_html=True)
     image = Image.open('images/'+resim5+'.png')
@@ -278,10 +276,10 @@ with colo5:
     st.markdown("<p style='text-align: center; color: black;font-size: 27px;font-weight:bold ;'>{} MWh</p>".format(uretim5), unsafe_allow_html=True)
 
 uretim6 = int(yedi["Generation"][5].round(0))
-#gun6= "Saturday"
+gun6en= "Saturday"
 gun6= "Cumartesi"
-durum6= weather.main(icono_df_dort["main"][:163][icono_df_dort["day"]==gun6][12:13].to_string(index=False))
-resim6 = weather.icon(icono_df_dort["icon"][:163][icono_df_dort["day"]==gun6][12:13].to_string(index=False))
+durum6= weather.main(icono_df_dort["main"][:163][icono_df_dort["day"]==gun6en][12:13].to_string(index=False))
+resim6 = weather.icon(icono_df_dort["icon"][:163][icono_df_dort["day"]==gun6en][12:13].to_string(index=False))
 with colo6:
     st.markdown("<p style='text-align: center; color: #ec6e4c;background-color:#f2f2f2;font-size: 20px;font-weight:bold ;'>{}</p>".format(gun6), unsafe_allow_html=True)
     image = Image.open('images/'+resim6+'.png')
@@ -289,10 +287,10 @@ with colo6:
     st.markdown("<p style='text-align: center; color: black;font-size: 27px;font-weight:bold ;'>{} MWh</p>".format(uretim6), unsafe_allow_html=True)
 
 uretim7 = int(yedi["Generation"][6].round(0))
-#gun7= "Sunday"
+gun7en= "Sunday"
 gun7= "Pazar"
-durum7= weather.main(icono_df_dort["main"][:163][icono_df_dort["day"]==gun7][12:13].to_string(index=False))
-resim7 = weather.icon(icono_df_dort["icon"][:163][icono_df_dort["day"]==gun7][12:13].to_string(index=False))
+durum7= weather.main(icono_df_dort["main"][:163][icono_df_dort["day"]==gun7en][12:13].to_string(index=False))
+resim7 = weather.icon(icono_df_dort["icon"][:163][icono_df_dort["day"]==gun7en][12:13].to_string(index=False))
 with colo7:
     st.markdown("<p style='text-align: center; color: #ec6e4c;background-color:#f2f2f2;font-size: 20px;font-weight:bold ;'>{}</p>".format(gun7), unsafe_allow_html=True)
     image = Image.open('images/'+resim7+'.png')

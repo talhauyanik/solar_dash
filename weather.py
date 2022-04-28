@@ -445,3 +445,19 @@ def icon(icon):
     elif icon == "50d" or icon == "50n":
         return "mist" 
 
+def cevir(gun):
+    
+    if gun == "Monday":
+        return "Pazartesi"
+    elif gun == "Tuesday":
+        return "Salı"
+    elif gun == "Wednesday":
+        return "Çarşamba"
+    elif gun == "Thursday":
+        return "Perşembe"
+    elif gun == "Friday":
+        return "Cuma"
+    elif gun == "Saturday":
+        return "Cumartesi"
+    elif gun == "Sunday":
+        return "Pazar"
