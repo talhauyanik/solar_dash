@@ -64,7 +64,7 @@ def cevir(sehir_ad,lat,lon):
 
     iconh_df["date"] = pd.to_datetime(iconh_df["date"])
     iconh_df.date = iconh_df["date"].dt.tz_localize("utc").dt.tz_convert('Asia/Istanbul')
-    iconh_df['date'] = iconh_df['date'].dt.strftime('%d-%m-%Y %H:%M:%S')
+    iconh_df['date'] = iconh_df['date'].dt.strftime('%Y-%m-%d %H:%M:%S')
     iconh_df
 
     icono_df = pd.concat([iconh_df, icon_df]).reset_index()

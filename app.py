@@ -14,6 +14,14 @@ import plotly.express as px
 import locale
 from datetime import datetime as dt2
 st.set_page_config(layout="wide",page_title="Güneş Enerjisi Üretim Tahmini",)
+st.markdown("""
+            <style>
+            
+            footer {visibility: hidden;}
+            .e19lei0e1 {visibility: hidden;}
+            </style>
+            """, unsafe_allow_html=True) 
+#MainMenu {visibility: hidden;}
 
 
 def local_css(file_name):
@@ -56,6 +64,7 @@ with st.sidebar:
     sicaklik = df["AirTemperature"][161:162].round(1).to_string(index=False)
     durum = weather.main(icono_df_dort["main"][161:162].to_string(index=False))
     resim = weather.icon(icono_df_dort["icon"][161:162].to_string(index=False))
+
     with scol1:
         st.markdown("<p style='text-align: right; color: #ec6e4c;font-size: 23px;font-weight:bold ;margin-right:10px'>Hava</p>", unsafe_allow_html=True)
         image = Image.open('images/'+resim+'.png')
@@ -69,15 +78,36 @@ with st.sidebar:
         st.markdown("<p style='text-align: center; color: #31333f;font-size: 22px;font-weight:bold ;margin-top:10px'>"+str(sehir)+"</p>", unsafe_allow_html=True)
         st.markdown("<p style='text-align: center; color: #31333f;font-size: 22px;font-weight:bold ;margin-top:5px'>"+sicaklik+" °C</p>", unsafe_allow_html=True)
         
-        saat = str(dt2.now().strftime("%H"))
+        saat = str(dt2.now().strftime("%d/%m/%Y %H"))
         st.markdown("<p style='text-align: left;color: #31333f;font-size: 13px ;margin-left:-5px'>"+saat+":00</p>", unsafe_allow_html=True)
 
+    df['dt_obj'] = pd.to_datetime(df['dt_obj'], errors='coerce')
+    yedigun = df.groupby(df["dt_obj"][:163].dt.weekday).sum()
+    yedi = yedigun.reset_index()
+
+    ready = pd.read_csv("ready.csv")
+    ready["dt_obj"] = pd.to_datetime(ready["dt_obj"])
 
 
+    anlik = str(int(df[162:163]["Generation"].round(0)))
+    anlik2 = "{:,}".format(int(anlik))
 
+    gunluk = str(int(yedi["Generation"][6].round(0)))
+    gunluk2 = "{:,}".format(int(gunluk))
 
+    ready_ay = round(int(float(ready["Generation"].sum().round(0)) / 36),2)   
+    aylik = str(int(gunluk) +ready_ay)  
+    aylik2 = "{:,}".format(int(aylik))
 
-       
+    ready_yil = int(ready["Generation"].sum().round(0))
+    yillik = int(aylik)  + ready_yil
+    yillik2 = "{:,}".format(yillik)
+
+    kapasite = (int(anlik) / 522) *100
+    kapasite = round(kapasite,1)
+    
+    st.markdown("<h1 style='text-align: center;font-size:20px ;margin-top: 0px; color: #31333f ;background:white;border-radius:5%;'>Kapasite Kullanımı %"+str(kapasite)+"</h1>", unsafe_allow_html=True)
+   
 st.markdown(
     """
     <style>
@@ -96,47 +126,31 @@ st.markdown(
 
 st.markdown("<h1 style='text-align: center;margin-top: -100px; color: #31333f ;'>Güneş Enerji Santrali Üretim Tahmini</h1>", unsafe_allow_html=True)
 st.markdown("<br>", unsafe_allow_html=True)
-df['dt_obj'] = pd.to_datetime(df['dt_obj'], errors='coerce')
-yedigun = df.groupby(df["dt_obj"][:163].dt.weekday).sum()
-yedi = yedigun.reset_index()
 
-ready = pd.read_csv("ready.csv")
-ready["dt_obj"] = pd.to_datetime(ready["dt_obj"])
-
-
-anlik = str(int(df[162:163]["Generation"].round(0)))
-anlik2 = "{:,}".format(int(anlik))
-
-gunluk = str(int(yedi["Generation"][6].round(0)))
-gunluk2 = "{:,}".format(int(gunluk))
-
-aylik = str(int(gunluk) * 22)
-aylik2 = "{:,}".format(int(aylik))
-
-yillik = int(aylik) * 32
-yillik2 = "{:,}".format(yillik)
 
 col1, col2, col3, col4 = st.columns(4)
 
 
 with col1:
     
-    st.markdown("<p style='text-align: center; color: #ec6e4c;background-color:#f2f2f2;font-size: 17px;font-weight:bold ;'>Anlık Üretim</p>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align: center; color: #ec6e4c;background-color:#f2f2f2;font-size: 20px;font-weight:bold ;'>Anlık Üretim</p>", unsafe_allow_html=True)
     st.markdown("<p style='text-align: center; color: #31333f;font-size: 30px;font-weight:bold ;'>"+anlik2+" MW</p>", unsafe_allow_html=True)
+
 
 with col2:
    
-    st.markdown("<p style='text-align: center; color: #ec6e4c;background-color:#f2f2f2;font-size: 17px;font-weight:bold ;'>Günlük Üretim</p>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align: center; color: #ec6e4c;background-color:#f2f2f2;font-size: 20px;font-weight:bold ;'>Günlük Üretim</p>", unsafe_allow_html=True)
     st.markdown("<p style='text-align: center; color: #31333f;font-size: 30px;font-weight:bold ;'>"+gunluk2+" MWh</p>", unsafe_allow_html=True)
+    
 
 with col3:
     
-    st.markdown("<p style='text-align: center; color: #ec6e4c;background-color:#f2f2f2;font-size: 17px;font-weight:bold ;'>Aylık Üretim</p>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align: center; color: #ec6e4c;background-color:#f2f2f2;font-size: 20px;font-weight:bold ;'>Aylık Üretim</p>", unsafe_allow_html=True)
     st.markdown("<p style='text-align: center; color: #31333f;font-size: 30px;font-weight:bold ;'>"+aylik2+" MWh</p>", unsafe_allow_html=True)
 
 with col4:
     
-    st.markdown("<p style='text-align: center; color: #ec6e4c;background-color:#f2f2f2;font-size: 17px;font-weight:bold ;'>Tüm Zamanlar Üretim</p>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align: center; color: #ec6e4c;background-color:#f2f2f2;font-size: 20px;font-weight:bold ;'>Tüm Zamanlar Üretim</p>", unsafe_allow_html=True)
     st.markdown("<p style='text-align: center; color: #31333f;font-size: 30px;font-weight:bold ;'>"+yillik2+" MWh</p>", unsafe_allow_html=True)
 
 
@@ -231,8 +245,8 @@ colo1, colo2, colo3, colo4, colo5, colo6, colo7 = st.columns(7)
 uretim1 = int(yedi["Generation"][0].round(0))
 gun1en= "Monday" 
 gun1= "Pazartesi"   
-durum1= weather.main(icono_df_dort["main"][:163][icono_df_dort["day"]==gun1en][12:13].to_string(index=False))
-resim1 = weather.icon(icono_df_dort["icon"][:163][icono_df_dort["day"]==gun1en][12:13].to_string(index=False))
+durum1= weather.main(icono_df_dort["main"][:175][icono_df_dort["day"]==gun1en][12:13].to_string(index=False))
+resim1 = weather.icon(icono_df_dort["icon"][:175][icono_df_dort["day"]==gun1en][12:13].to_string(index=False))
 with colo1:
     st.markdown("<p style='text-align: center; color: #ec6e4c;background-color:#f2f2f2;font-size: 20px;font-weight:bold ;'>{}</p>".format(gun1), unsafe_allow_html=True)
     image = Image.open('images/'+resim1+'.png')
@@ -242,8 +256,8 @@ with colo1:
 uretim2 = int(yedi["Generation"][1].round(0))
 gun2en= "Tuesday"   
 gun2= "Salı"
-durum2= weather.main(icono_df_dort["main"][:163][icono_df_dort["day"]==gun2en][12:13].to_string(index=False))
-resim2 = weather.icon(icono_df_dort["icon"][:163][icono_df_dort["day"]==gun2en][12:13].to_string(index=False))
+durum2= weather.main(icono_df_dort["main"][:175][icono_df_dort["day"]==gun2en][12:13].to_string(index=False))
+resim2 = weather.icon(icono_df_dort["icon"][:175][icono_df_dort["day"]==gun2en][12:13].to_string(index=False))
 with colo2:
     st.markdown("<p style='text-align: center; color: #ec6e4c;background-color:#f2f2f2;font-size: 20px;font-weight:bold ;'>{}</p>".format(gun2), unsafe_allow_html=True)
     image = Image.open('images/'+resim2+'.png')
@@ -253,8 +267,8 @@ with colo2:
 uretim3 = int(yedi["Generation"][2].round(0))
 gun3en= "Wednesday"
 gun3= "Çarşamba"
-durum3= weather.main(icono_df_dort["main"][:163][icono_df_dort["day"]==gun3en][12:13].to_string(index=False))
-resim3 = weather.icon(icono_df_dort["icon"][:163][icono_df_dort["day"]==gun3en][12:13].to_string(index=False))
+durum3= weather.main(icono_df_dort["main"][:175][icono_df_dort["day"]==gun3en][12:13].to_string(index=False))
+resim3 = weather.icon(icono_df_dort["icon"][:175][icono_df_dort["day"]==gun3en][12:13].to_string(index=False))
 with colo3:
     st.markdown("<p style='text-align: center; color: #ec6e4c;background-color:#f2f2f2;font-size: 20px;font-weight:bold ;'>{}</p>".format(gun3), unsafe_allow_html=True)
     image = Image.open('images/'+resim3+'.png')
@@ -264,8 +278,8 @@ with colo3:
 uretim4 = int(yedi["Generation"][3].round(0))
 gun4en= "Thursday"
 gun4= "Perşembe"
-durum4= weather.main(icono_df_dort["main"][:163][icono_df_dort["day"]==gun4en][12:13].to_string(index=False))
-resim4 = weather.icon(icono_df_dort["icon"][:163][icono_df_dort["day"]==gun4en][12:13].to_string(index=False))
+durum4= weather.main(icono_df_dort["main"][:175][icono_df_dort["day"]==gun4en][12:13].to_string(index=False))
+resim4 = weather.icon(icono_df_dort["icon"][:175][icono_df_dort["day"]==gun4en][12:13].to_string(index=False))
 with colo4:
     st.markdown("<p style='text-align: center; color: #ec6e4c;background-color:#f2f2f2;font-size: 20px;font-weight:bold ;'>{}</p>".format(gun4), unsafe_allow_html=True)
     image = Image.open('images/'+resim4+'.png')
@@ -275,8 +289,8 @@ with colo4:
 uretim5 = int(yedi["Generation"][4].round(0))
 gun5en= "Friday"
 gun5= "Cuma"
-durum5= weather.main(icono_df_dort["main"][:163][icono_df_dort["day"]==gun5en][12:13].to_string(index=False))
-resim5 = weather.icon(icono_df_dort["icon"][:163][icono_df_dort["day"]==gun5en][12:13].to_string(index=False))
+durum5= weather.main(icono_df_dort["main"][:175][icono_df_dort["day"]==gun5en][12:13].to_string(index=False))
+resim5 = weather.icon(icono_df_dort["icon"][:175][icono_df_dort["day"]==gun5en][12:13].to_string(index=False))
 with colo5:
     st.markdown("<p style='text-align: center; color: #ec6e4c;background-color:#f2f2f2;font-size: 20px;font-weight:bold ;'>{}</p>".format(gun5), unsafe_allow_html=True)
     image = Image.open('images/'+resim5+'.png')
@@ -286,8 +300,8 @@ with colo5:
 uretim6 = int(yedi["Generation"][5].round(0))
 gun6en= "Saturday"
 gun6= "Cumartesi"
-durum6= weather.main(icono_df_dort["main"][:163][icono_df_dort["day"]==gun6en][12:13].to_string(index=False))
-resim6 = weather.icon(icono_df_dort["icon"][:163][icono_df_dort["day"]==gun6en][12:13].to_string(index=False))
+durum6= weather.main(icono_df_dort["main"][:175][icono_df_dort["day"]==gun6en][12:13].to_string(index=False))
+resim6 = weather.icon(icono_df_dort["icon"][:175][icono_df_dort["day"]==gun6en][12:13].to_string(index=False))
 with colo6:
     st.markdown("<p style='text-align: center; color: #ec6e4c;background-color:#f2f2f2;font-size: 20px;font-weight:bold ;'>{}</p>".format(gun6), unsafe_allow_html=True)
     image = Image.open('images/'+resim6+'.png')
@@ -297,8 +311,8 @@ with colo6:
 uretim7 = int(yedi["Generation"][6].round(0))
 gun7en= "Sunday"
 gun7= "Pazar"
-durum7= weather.main(icono_df_dort["main"][:163][icono_df_dort["day"]==gun7en][12:13].to_string(index=False))
-resim7 = weather.icon(icono_df_dort["icon"][:163][icono_df_dort["day"]==gun7en][12:13].to_string(index=False))
+durum7= weather.main(icono_df_dort["main"][:175][icono_df_dort["day"]==gun7en][12:13].to_string(index=False))
+resim7 = weather.icon(icono_df_dort["icon"][:175][icono_df_dort["day"]==gun7en][12:13].to_string(index=False))
 with colo7:
     st.markdown("<p style='text-align: center; color: #ec6e4c;background-color:#f2f2f2;font-size: 20px;font-weight:bold ;'>{}</p>".format(gun7), unsafe_allow_html=True)
     image = Image.open('images/'+resim7+'.png')
@@ -309,8 +323,6 @@ with colo7:
 ######################################################
 
 st.markdown("<br><br><br>",unsafe_allow_html=True)
-
-
 
 
 ready["Generation"][25560:26303] = ready["Generation"][17544:18286]
@@ -367,10 +379,10 @@ st.plotly_chart(fig,use_container_width=True)
 #df["dt_obj"] = pd.to_datetime(df["dt_obj"])
 
 fig2 = go.Figure()
-fig2.add_trace(go.Scatter(x=df["dt_obj"][:162], y=df["Generation"][:162], name='Geçmiş<br>Üretim',
+fig2.add_trace(go.Scatter(x=df["dt_obj"][:162], y=df["Generation"][:162], name='Geçmiş Üretim',
                          line=dict(color='#ec6e4c', width=4)))
 
-fig2.add_trace(go.Scatter(x=df["dt_obj"][161:], y=df["Generation"][161:], name='Tahmini<br>Üretim',
+fig2.add_trace(go.Scatter(x=df["dt_obj"][161:], y=df["Generation"][161:], name='Tahmini Üretim',
                          line=dict(color='#4c79ec', width=4)))
  
 fig2.update_xaxes(tickformat='%d %B')
@@ -407,14 +419,11 @@ fig2.update_layout(
 
 st.plotly_chart(fig2,use_container_width=True)
 
+                    ####GÜNLÜK ÜRETİM BAR GRAFİK TURUNCU MAVİ RENKLİ
+#anlikchart = int(df[162:163]["Generation"].round(0))
 
-st.markdown("""
-            <style>
-            
-            footer {visibility: hidden;}
-            </style>
-            """, unsafe_allow_html=True) 
-#MainMenu {visibility: hidden;}
+
+
 
 
     
