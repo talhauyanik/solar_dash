@@ -10,3 +10,4 @@ astral
 astropy
 joblib
 catboost
+awesome_streamlit
