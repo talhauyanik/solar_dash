@@ -56,25 +56,26 @@ def write():
         
 
         sicaklik = df["AirTemperature"][161:162].round(1).to_string(index=False)
-        durum = weather.iconmain(icono_df_dort["icon"][161:162].to_string(index=False))
+        durum = weather.iconmain(icono_df_dort["icon"][161:162].to_string(index=False)) 
         resim = weather.icon(icono_df_dort["icon"][161:162].to_string(index=False))
+        
 
         with scol1:
-            st.markdown("<p style='text-align: right; color: #e08a12;font-size: 23px;font-weight:bold ;margin-right:10px'>Hava</p>", unsafe_allow_html=True)
+            st.markdown("<p style='text-align: right; color: #e08a12;font-size: 23px;font-weight:bold ;margin-right:10px;'>Hava</p>", unsafe_allow_html=True)
             image = Image.open('images/'+resim+'.png')
             st.image(image,use_column_width="auto")
-            st.markdown("<p style='text-align: center; color: #31333f;font-size: 1rem;font-weight:bold ;margin-top:-25px'>"+durum+"</p>", unsafe_allow_html=True)
-            st.markdown("<p style='text-align: right;color: #31333f;font-size: 13px ;'>Son Güncelleme</p>", unsafe_allow_html=True)
+            st.markdown("<p style='text-align: center; color: #31333f;font-size: 1rem;font-weight:bold ;margin-top:-1rem'>"+durum+"</p>", unsafe_allow_html=True)
+            
         with scol2:
 
-            st.markdown("<p style='text-align: left; color: #e08a12;font-size: 23px;font-weight:bold ;margin-left:-20px'>Durumu</p>", unsafe_allow_html=True)
+            st.markdown("<p style='text-align: left; color: #e08a12;font-size: 23px;font-weight:bold ;margin-left:-20px;'>Durumu</p>", unsafe_allow_html=True)
             st.markdown("<br>",unsafe_allow_html=True)
-            st.markdown("<p style='text-align: center; color: #31333f;font-size: 22px;font-weight:bold ;margin-top:0.5rem;'>"+str(sehir)+"</p>", unsafe_allow_html=True)
-            st.markdown("<p style='text-align: center; color: #31333f;font-size: 22px;font-weight:bold ;margin-top:1rem'>"+sicaklik+" °C</p>", unsafe_allow_html=True)
+            st.markdown("<p style='text-align: center; color: #31333f;font-size: 22px;font-weight:bold ;'>"+str(sehir)+"</p>", unsafe_allow_html=True)
+            st.markdown("<p style='text-align: center; color: #31333f;font-size: 22px;font-weight:bold ;margin-top:1.5rem'>"+sicaklik+" °C</p>", unsafe_allow_html=True)
 
-            saat = str(dt2.now().strftime("%d/%m/%Y %H"))
-            st.markdown("<p style='text-align: left;color: #31333f;font-size: 13px ;margin-left:-5px;margin-top:7%'>"+saat+":00</p>", unsafe_allow_html=True)
-
+        saat = str(dt2.now().strftime("%d/%m/%Y %H"))
+        
+        st.markdown("<p style='text-align: right;color: #31333f;font-size: 13px ; margin-right: 20px;margin-top: -10px;'>Son Güncelleme "+saat+":00</p>", unsafe_allow_html=True)
         df['dt_obj'] = pd.to_datetime(df['dt_obj'], errors='coerce')
         
         yedigun = df.groupby(df["dt_obj"][:163].dt.weekday).sum()
