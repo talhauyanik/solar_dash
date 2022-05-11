@@ -8,9 +8,9 @@ headless = true\n\
 [theme]\n\
 base ='light'\n\
 textColor = '#31333F'\n\
-primaryColor = '#ec6e4c'\n\
+primaryColor = '#e08a12'\n\
 backgroundColor = '#ffffff'\n\
 secondaryBackgroundColor = '#F0F2F6'\n\
-font = 'serif'\n\
+font = 'sans serif'\n\
 \n\
 " > ~/.streamlit/config.toml
