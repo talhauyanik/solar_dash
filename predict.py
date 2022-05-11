@@ -15,7 +15,9 @@ import locale
 from datetime import datetime as dt2
 import awesome_streamlit as ast
 
+
 def write():
+    
     st.markdown("""
                 <style>
 

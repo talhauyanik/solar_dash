@@ -15,9 +15,11 @@ import locale
 from datetime import datetime as dt2
 import awesome_streamlit as ast
 
-st.set_page_config(layout="wide",page_title="Güneş Enerjisi Üretim Tahmini",)
+
+    
 st.cache()
-def write():
+
+def write(): 
     
     st.markdown("""
                 <style>
@@ -105,8 +107,8 @@ def write():
         kapasite = (int(anlik) / 522) *100
         kapasite = round(kapasite,1)
 
-        st.markdown("<h1 style='background:white;text-align: center;font-size:19px ;margin-top: 0px;border-radius:5%;'><span style=' color: #31333f ;'>Mevcut Kapasite<br>522 MWp<br><br>Kapasite Kullanımı<br>%"+str(kapasite)+"<span></h1>", unsafe_allow_html=True)
-    
+        st.markdown("<h1 style='background:white;text-align: center;font-size:19px ;margin-top: 0px;border-radius: 5% 5% 0% 0%;'><span style=' color: #31333f ;'>Mevcut Kapasite<br>522 MWp<br><br>Kapasite Kullanımı<br>%"+str(kapasite)+"<span></h1>", unsafe_allow_html=True)
+        st.progress(kapasite)
 
 
 
