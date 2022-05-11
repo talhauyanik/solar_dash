@@ -27,11 +27,13 @@ def cevir(sehir_ad,lat,lon):
 
     data_date = pd.json_normalize(data_now)
     data_now["list"][0]["weather"]
+    w_desc = []
     w_main = []
     w_icon = []
     w_date = []
 
     for i in range(len(data_now["list"])):
+       w_desc.append(data_now["list"][i]["weather"][0]["description"])
        w_main.append(data_now["list"][i]["weather"][0]["main"])
        w_icon.append(data_now["list"][i]["weather"][0]["icon"])
        w_date.append(data_now["list"][i]["dt_txt"])
@@ -39,22 +41,26 @@ def cevir(sehir_ad,lat,lon):
     icon_df = pd.DataFrame(w_icon)
     icon_df = icon_df.rename(columns={0:"icon"})
     icon_df["main"] = w_main
+    icon_df["desc"] = w_desc
     icon_df["date"] = w_date
 
     icon_df
 
     data_hist["list"][0]["weather"]
+    wh_desc = []
     wh_main = []
     wh_icon = []
     wh_date = []
 
     for i in range(len(data_hist["list"])):
       wh_main.append(data_hist["list"][i]["weather"][0]["main"])
+      wh_desc.append(data_hist["list"][i]["weather"][0]["description"])
       wh_icon.append(data_hist["list"][i]["weather"][0]["icon"])
       wh_date.append(data_hist["list"][i]["dt"])
 
     iconh_df = pd.DataFrame(wh_icon)
     iconh_df = iconh_df.rename(columns={0:"icon"})
+    iconh_df["desc"] = wh_desc
     iconh_df["main"] = wh_main
     iconh_df["date"] = wh_date
 

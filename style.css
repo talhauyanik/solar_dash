@@ -6,3 +6,25 @@ body {
     background-color: white;
     border-radius: 5%;
 }
+
+
+
+
+
+
+[data-testid="stSidebar"][aria-expanded="true"] > div:first-child {
+  width: 250px;
+  padding-top: 20px;
+  
+}
+[data-testid="stSidebar"][aria-expanded="false"] > div:first-child {
+  width: 250px;
+  margin-left: -250px;
+  padding-top: 20px;
+}
+
+
+
+
+
+

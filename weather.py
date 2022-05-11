@@ -445,6 +445,26 @@ def icon(icon):
     elif icon == "50d" or icon == "50n":
         return "mist" 
 
+def iconmain(iconmain):
+    if iconmain == "01d" or iconmain == "01n":
+        return "Güneşli"
+    elif iconmain == "02d" or iconmain == "02n":
+        return "Az Bulutlu"
+    elif iconmain == "03d" or iconmain == "03n":
+        return "Parçalı Az Bulutlu"
+    elif iconmain == "04d" or iconmain == "04n":
+        return "Parçalı Bulutlu"
+    elif iconmain == "09d" or iconmain == "09n":
+        return "Sağanak Yağışlı"
+    elif iconmain == "10d" or iconmain == "10n":
+        return "Yağmurlu"
+    elif iconmain == "11d" or iconmain == "11n":
+        return "Fırtınalı"
+    elif iconmain == "13d" or iconmain == "13n":
+        return "Kar Yağışlı"
+    elif iconmain == "50d" or iconmain == "50n":
+        return "Sisli" 
+
 def cevir(gun):
     
     if gun == "Monday":
