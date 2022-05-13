@@ -159,7 +159,7 @@ def predict(sehir_ad,lat,lon):
 
 #rain.1h droplanacak olan kolon ismi
     col_index = wh_df.columns[1]
-    wh_df.drop(["weather","main.temp_min","main.temp_max","main.pressure","wind.gust"], axis = 1, inplace = True)
+    #wh_df.drop(["weather","main.temp_min","main.temp_max","main.pressure","wind.gust"], axis = 1, inplace = True)
     wh_df[col_index] = ww_code2
 
     wh_df["clouds.all"][(wh_df["clouds.all"]< 11.11) & (wh_df["clouds.all"] >= 0)] = 0

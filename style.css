@@ -1,5 +1,5 @@
 body {
-    background-color: white;
+    background-color: #ffffff;
   }
   
 .css-ocqkz7.e1tzin5v4{
@@ -7,9 +7,12 @@ body {
     border-radius: 5%;
 }
 
+.css-eczf16.e16nr0p31{
+  visibility: hidden;
+}
+#MainMenu {visibility: hidden;}
 
-
-
+#modebar-d6c5ee{visibility: hidden;}
 
 
 [data-testid="stSidebar"][aria-expanded="true"] > div:first-child {
