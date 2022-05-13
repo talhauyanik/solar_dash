@@ -15,19 +15,28 @@ import locale
 from datetime import datetime as dt2
 import awesome_streamlit as ast
 from plotly.subplots import make_subplots
+import streamlit.components.v1 as components
 
 
     
 st.cache()
 
 def write(): 
-    
+    components.html(
+    f"""
+        
+        <script>
+            window.parent.document.querySelector('section.main').scrollTo(0, 0);
+        </script>
+    """,
+    height=0
+)
     st.markdown("""
                 <style>
 
                 footer {visibility: hidden;}
                 .e19lei0e1 {visibility: hidden;}
-                MainMenu {visibility: hidden;}
+                
                 </style>
                 """, unsafe_allow_html=True) 
     #MainMenu {visibility: hidden;}
@@ -60,16 +69,16 @@ def write():
         durum = weather.iconmain(icono_df_dort["icon"][161:162].to_string(index=False)) 
         resim = weather.icon(icono_df_dort["icon"][161:162].to_string(index=False))
         
-
+ 
         with scol1:
-            st.markdown("<p style='text-align: right; color: #e08a12;font-size: 23px;font-weight:bold ;margin-right:10px;'>Hava</p>", unsafe_allow_html=True)
+            st.markdown("<p style='text-align: right; color: #31333f;font-size: 23px;font-weight:bold ;margin-right:10px;'>Hava</p>", unsafe_allow_html=True)
             image = Image.open('images/'+resim+'.png')
             st.image(image,use_column_width="auto")
             st.markdown("<p style='text-align: center; color: #31333f;font-size: 1rem;font-weight:bold ;margin-top:-1rem'>"+durum+"</p>", unsafe_allow_html=True)
             
         with scol2:
 
-            st.markdown("<p style='text-align: left; color: #e08a12;font-size: 23px;font-weight:bold ;margin-left:-20px;'>Durumu</p>", unsafe_allow_html=True)
+            st.markdown("<p style='text-align: left; color: #31333f;font-size: 23px;font-weight:bold ;margin-left:-20px;'>Durumu</p>", unsafe_allow_html=True)
             st.markdown("<br>",unsafe_allow_html=True)
             st.markdown("<p style='text-align: center; color: #31333f;font-size: 22px;font-weight:bold ;'>"+str(sehir)+"</p>", unsafe_allow_html=True)
             st.markdown("<p style='text-align: center; color: #31333f;font-size: 22px;font-weight:bold ;margin-top:1.5rem'>"+sicaklik+" °C</p>", unsafe_allow_html=True)
@@ -116,19 +125,46 @@ def write():
         yillik2 = "{:,}".format(yillik)
 
         kapasite = (int(anlik) / 522) *100
-        kapasite = round(kapasite,1)
+        kapasite = round(kapasite,0)
 
         #st.markdown("<h1 style='background:white;text-align: center;font-size:19px ;margin-top: 0px;border-radius: 5% 5% 0% 0%;'><span style=' color: #31333f ;'>Mevcut Kapasite<br>522 MWp<br><br>Kapasite Kullanımı<br>%"+str(kapasite)+"<span></h1>", unsafe_allow_html=True)
         #st.progress(kapasite/100)
         kapasiteright = kapasite/100
-        kapasiteright = 0.6
+        
         kapasiteleft = 1-kapasiteright
         
         labels = ['Kullanılan',"Boş"]
         values = [kapasiteright, kapasiteleft]
+ 
 
+        fig4 = go.Figure(go.Indicator(
+        domain = {'x': [0, 1], 'y': [0, 1]},
+        value = kapasite,
+        number= { 'suffix': "%" },
         
-        fig4 = go.Figure(data=[go.Pie(labels=labels, values=values)])
+        mode = "gauge+number",
+        
+        
+        gauge = {'axis': {'range': [0, 100]},
+                 'bar': {'color': "#e08a12"},
+                 }))
+        
+        fig4.update_layout(
+            margin=dict(l=5, r=5, t=50, b=0),
+            title_text = "<b>Anlık Kapasite Kullanımı</b>",
+            title_x=0.5,
+            showlegend=False,
+            width=215,
+            height=200,
+             font=dict(
+            family="Source Sans Pro",
+            size=13,
+            color="#31333f")
+            
+            ),
+        st.plotly_chart(fig4)
+#-----------------------------------------        
+    """ fig4 = go.Figure(data=[go.Pie(labels=labels, values=values)])
         
         fig4.update_traces(hole=.7,textinfo='none',marker=dict(colors=['#e08a12','#FFFFFF']) )
 
@@ -144,12 +180,12 @@ def write():
         size=13,
         color="#31333f"
     ),
-            # Add annotations in the center of the donut pies.
+            
             annotations=[dict(text="<b>%"+str(kapasite)+"</b>", x=0.5, y=0.5, font_size=25, showarrow=False)])
         st.subheader(" ")
         st.plotly_chart(fig4)
- 
-
+ """
+#----------------------------------------
 
     st.markdown("<h1 style='text-align: center;margin-top: -100px; color: #31333f ;'>Ankara 522 MW GES Üretim Tahmin ve Analizi</h1>", unsafe_allow_html=True)
     st.markdown("<br>", unsafe_allow_html=True)
@@ -172,7 +208,7 @@ def write():
 
     with col3: 
 
-        st.markdown("<p style='text-align: center; color: #e08a12;background-color:#f2f2f2;font-size: 1.3vw;font-weight:bold ;'>2021 4Aylık Ortalama Üretim</p>", unsafe_allow_html=True)
+        st.markdown("<p style='text-align: center; color: #e08a12;background-color:#f2f2f2;font-size: 1.3vw;font-weight:bold ;'>2021 Aylık Ortalama Üretim</p>", unsafe_allow_html=True)
         st.markdown("<p style='text-align: center; color: #31333f;font-size: 1.8vw;font-weight:bold ;'>"+aylik2+" MWh</p>", unsafe_allow_html=True)
 
     with col4:
@@ -196,9 +232,6 @@ def write():
 
     #cats = [ 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi', 'Pazar']
     
-
-
-
 
 
     gun_tahmin1 = weather.cevir((datetime.date.today() + datetime.timedelta(days=0)).strftime("%A"))
@@ -345,6 +378,50 @@ def write():
 
     st.markdown("<br><br><br>",unsafe_allow_html=True)
 
+    #locale.setlocale(locale.LC_TIME, 'tr_TR')
+    #df["dt_obj"] = pd.to_datetime(df["dt_obj"])
+
+    fig2 = go.Figure()
+    fig2.add_trace(go.Scatter(x=df["dt_obj"][:162], y=df["Generation"][:162], name='Geçmiş Üretim',
+                             line=dict(color='#e08a12', width=4)))
+
+    fig2.add_trace(go.Scatter(x=df["dt_obj"][161:], y=df["Generation"][161:], name='Tahmini Üretim',
+                             line=dict(color='#129be0', width=4)))
+    
+    fig2.update_xaxes(tickformat='%d %B')
+
+
+    fig2.update_layout(
+        margin=dict(l=0, r=0, t=80, b=0), 
+        font=dict(
+            #family="sans-serif",
+            size=18,
+            color="#000000"
+        ), 
+        xaxis_tickangle=0,
+        xaxis_tickmode="linear", 
+        xaxis_title='Günler',
+        yaxis_title='Üretim (MWh)',
+
+        title=dict(
+            text='<b>Günlük Üretim (MWh)</b>',
+            x=0.5,
+            y=0.95,
+            font=dict(
+                #family="Arial",
+                size=35,
+                color='#31333f'
+            ))
+            ,uniformtext_minsize=35,
+            legend=dict(
+        orientation="h",
+        yanchor="bottom",
+        y=1.02,
+        xanchor="right",
+        x=1
+    ))
+    
+    st.plotly_chart(fig2,use_container_width=True)
 
     ready["Generation"][25560:26303] = ready["Generation"][17544:18286]
     aylik2019 = ready.groupby(ready["dt_obj"][ready["year"] == 2019].dt.month).sum()
@@ -393,60 +470,10 @@ def write():
                 color='#31333f'
             ))
             ,uniformtext_minsize=35)
-    #st.plotly_chart(fig,use_container_width=True)
-
-
-
-    #locale.setlocale(locale.LC_TIME, 'tr_TR')
-    #df["dt_obj"] = pd.to_datetime(df["dt_obj"])
-
-    fig2 = go.Figure()
-    fig2.add_trace(go.Scatter(x=df["dt_obj"][:162], y=df["Generation"][:162], name='Geçmiş Üretim',
-                             line=dict(color='#e08a12', width=4)))
-
-    fig2.add_trace(go.Scatter(x=df["dt_obj"][161:], y=df["Generation"][161:], name='Tahmini Üretim',
-                             line=dict(color='#129be0', width=4)))
-    
-    fig2.update_xaxes(tickformat='%d %B')
-
-
-    fig2.update_layout(
-        margin=dict(l=0, r=0, t=80, b=0), 
-        font=dict(
-            #family="sans-serif",
-            size=18,
-            color="#000000"
-        ), 
-        xaxis_tickangle=0,
-        xaxis_tickmode="linear", 
-        xaxis_title='Günler',
-        yaxis_title='Üretim (MWh)',
-
-        title=dict(
-            text='<b>Günlük Üretim (MWh)</b>',
-            x=0.5,
-            y=0.95,
-            font=dict(
-                #family="Arial",
-                size=35,
-                color='#31333f'
-            ))
-            ,uniformtext_minsize=35,
-            legend=dict(
-        orientation="h",
-        yanchor="bottom",
-        y=1.02,
-        xanchor="right",
-        x=1
-    ))
-    
-    st.plotly_chart(fig2,use_container_width=True)
-    st.subheader(" ")
-
     st.plotly_chart(fig,use_container_width=True)
     
-                        ####GÜNLÜK ÜRETİM BAR GRAFİK TURUNCU MAVİ RENKLİ
-    #anlikchart = int(df[162:163]["Generation"].round(0))
+    
+                        
 
 
 
