@@ -112,7 +112,7 @@ def write():
 
         #st.write(sehir_ad,lat,lon,pot,month_now,oran,day)    
         
-        st.markdown("<h2 style='text-align: center;margin-top: -100px; color: #31333f ;'>"+sehir_ad+" "+str(kapasite)+" kWp Kapasite İçin Tahminler</h2>", unsafe_allow_html=True)
+        st.markdown("<h2 style='text-align: center;margin-top: -100px; color: #31333f ;font-size:3rem'>"+sehir_ad+" "+str(kapasite)+" kWp Kapasite İçin Tahminler</h2>", unsafe_allow_html=True)
         st.subheader(" ")
         df = weather.predict(sehir_ad,lat,lon)
         yedigun = df.groupby(df["dt_obj"][:163].dt.weekday).sum()

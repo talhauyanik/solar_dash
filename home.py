@@ -22,6 +22,7 @@ import streamlit.components.v1 as components
 st.cache()
 
 def write(): 
+    
     components.html(
     f"""
         
@@ -177,7 +178,7 @@ def write():
             height=200,
              font=dict(
         family="sans-serif",
-        size=13,
+        size=13, 
         color="#31333f"
     ),
             
