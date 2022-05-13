@@ -12,7 +12,7 @@ PAGES = {
     "Tahminleme": predict, 
     "Hakkında":about,         
              
-}       
+}          
 
 def main():
       

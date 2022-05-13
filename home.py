@@ -187,7 +187,7 @@ def write():
  """
 #----------------------------------------
 
-    st.markdown("<h1 style='text-align: center;margin-top: -100px; color: #31333f ;'>Ankara 522 MW GES Üretim Tahmin ve Analizi</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center;margin-top: -8rem; color: #31333f ;'>Ankara 522 MW GES Üretim Tahmin ve Analizi</h1>", unsafe_allow_html=True)
     st.markdown("<br>", unsafe_allow_html=True)
 
 

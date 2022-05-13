@@ -10,7 +10,13 @@ body {
 .css-eczf16.e16nr0p31{
   visibility: hidden;
 }
-/*#MainMenu {visibility: hidden;}*/
+
+.block-container.css-18e3th9.egzxvld2{
+  padding-top: 5rem;
+}
+
+#MainMenu {
+  display: none;}
 
 .css-qrbaxs.effi0qh3{
   display: none;
