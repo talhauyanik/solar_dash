@@ -36,7 +36,7 @@ def write():
     #locale.setlocale(locale.LC_ALL, "en_US")
 
     with st.sidebar:
-        st.subheader(" ")
+        st.subheader(" ") 
         with st.form("my_form"):
             st.write("Tahmini Üretim Hesaplama")
             sehir_ad = st.selectbox(
@@ -258,7 +258,7 @@ def write():
             yaxis_title='Üretim (kWh)',
 
             title=dict(
-                text='<b>Günlük Üretim (kWh)</b>',
+                text='<b>Saatlik Üretim (kWh)</b>',
                 x=0.5,
                 y=0.95,
                 font=dict(
@@ -278,20 +278,34 @@ def write():
         st.plotly_chart(fig2,use_container_width=True)
         
         
-        aylik = ready.groupby(ready["dt_obj"][ready["year"] == 2020][ready["month"] == month_now].dt.day).sum().reset_index()
-        
-        
+        aylik = ready.groupby(ready["dt_obj"][ready["month"]==month_now].dt.day).sum().reset_index() / 3
+        aylikort = ready.groupby(ready["dt_obj"][ready["month"]==month_now].dt.day).sum().reset_index() / 3
+        aylikort["ort"] = aylikort["Generation"].mean()
+
+
         fig = go.Figure()
         fig.add_trace(go.Bar(
-            x=aylik["dt_obj"],
+            x=aylik["dt_obj"]*3,
             y=round(aylik["Generation"]*oran,0),
             marker_color='#e08a12',
             name="Toplam Üretim",
             text=round(aylik["Generation"]*oran,0),
             texttemplate='%{text:.2s}',
+            textfont_size=13,
+            textposition="outside",
+            cliponaxis=False,
+            textangle = 0
+        ))
+        fig.add_trace(go.Scatter(
+            x=aylik["dt_obj"]*3,
+            y=round(aylikort["ort"]*oran,0),
+            marker_color='#000000',
+            name="Ortalama",
+            
+            
         ))
         
-        fig.update_traces(textfont_size=12, textangle=0, textposition="outside", cliponaxis=False)
+        #fig.update_traces(textfont_size=12,  textposition="outside", cliponaxis=False)
         # Here we modify the tickangle of the xaxis, resulting in rotated labels.
         fig.update_layout(
             font=dict(
@@ -305,7 +319,7 @@ def write():
             
 
             title=dict(
-                text='<b>'+weather.aycevir(month_name_now)+' Ayı Üretim (kWh)</b>',
+                text='<b>'+weather.aycevir(month_name_now)+' Ayı Günlük Üretim (kWh)</b>',
                 x=0.5,
                 y=0.95,
                 font=dict(
@@ -323,7 +337,7 @@ def write():
         st.plotly_chart(fig,use_container_width=True)
 
 
-        yillik = ready.groupby(ready["dt_obj"][ready["year"] == 2020].dt.month).sum().reset_index()
+        yillik = ready.groupby(ready["dt_obj"].dt.month).sum().reset_index() / 3
         months = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
                   'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık']
         fig = go.Figure()
@@ -348,7 +362,7 @@ def write():
             yaxis_title='Üretim (kWh)',
 
             title=dict(
-                text='<b>Yıllık Üretim (kWh)</b>',
+                text='<b>Aylık Üretim (kWh)</b>',
                 x=0.5,
                 y=0.95,
                 font=dict(

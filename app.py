@@ -15,7 +15,7 @@ PAGES = {
 }          
 
 def main():
-      
+          
     with st.sidebar:  
         
         st.image("images/logov5.png",width=120)

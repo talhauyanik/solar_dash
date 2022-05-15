@@ -11,22 +11,20 @@ body {
   visibility: hidden;
 }
 
-.block-container.css-18e3th9.egzxvld2{
+/*.block-container.css-18e3th9.egzxvld2{
   padding-top: 6rem;
 }
-
+*/
 #MainMenu {
   display: none;}
 
-.css-qrbaxs.effi0qh3{
-  display: none;
-}
+
 .modebar-group{
   visibility: hidden;
 }
 
 [data-testid="stSidebar"][aria-expanded="true"] > div:first-child {
-  width: 250px;
+  width: 270px;
   padding-top: 20px;
   
 }

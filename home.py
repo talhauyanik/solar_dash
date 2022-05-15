@@ -151,11 +151,11 @@ def write():
                  }))
         
         fig4.update_layout(
-            margin=dict(l=5, r=5, t=50, b=0),
+            margin=dict(l=15, r=15, t=50, b=0),
             title_text = "<b>Anlık Kapasite Kullanımı</b>",
             title_x=0.5,
             showlegend=False,
-            width=215,
+            width=225,
             height=200,
              font=dict(
             family="Source Sans Pro",
