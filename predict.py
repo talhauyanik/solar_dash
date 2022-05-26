@@ -14,16 +14,26 @@ import plotly.express as px
 import locale
 from datetime import datetime as dt2
 import awesome_streamlit as ast
+import streamlit.components.v1 as components
 
 
 def write():
-    
+
+    components.html(
+    f"""
+        
+        <script>
+            window.parent.document.querySelector('section.main').scrollTo(0, 0);
+        </script>
+    """,
+    height=0
+)
     st.markdown("""
                 <style>
 
                 footer {visibility: hidden;}
                 .e19lei0e1 {visibility: hidden;}
-                MainMenu {visibility: hidden;}
+                
                 </style>
                 """, unsafe_allow_html=True) 
     #MainMenu {visibility: hidden;}
@@ -112,7 +122,7 @@ def write():
 
         #st.write(sehir_ad,lat,lon,pot,month_now,oran,day)    
         
-        st.markdown("<h2 style='text-align: center;margin-top: -100px; color: #31333f ;font-size:3rem'>"+sehir_ad+" "+str(kapasite)+" kWp Kapasite İçin Tahminler</h2>", unsafe_allow_html=True)
+        st.markdown("<h1 style='text-align: center;margin-top: -3rem; color: #31333f '>"+sehir_ad+" "+str(kapasite)+" kWp Kapasite İçin Tahminler</h1>", unsafe_allow_html=True)
         st.subheader(" ")
         df = weather.predict(sehir_ad,lat,lon)
         yedigun = df.groupby(df["dt_obj"][:163].dt.weekday).sum()
@@ -155,25 +165,25 @@ def write():
 
         with col1:
 
-            st.markdown("<p style='text-align: center; color: #e08a12;background-color:#f2f2f2;font-size: 1.3vw;font-weight:bold ;'>Anlık Üretim</p>", unsafe_allow_html=True)
-            st.markdown("<p style='text-align: center; color: #31333f;font-size: 1.8vw;font-weight:bold ;'>"+anlik+" kW</p>", unsafe_allow_html=True)
+            st.markdown("<p style='text-align: center; color: #e08a12;background-color:#f2f2f2;font-size: 1.3rem;font-weight:bold ;'>Anlık Üretim</p>", unsafe_allow_html=True)
+            st.markdown("<p style='text-align: center; color: #31333f;font-size: 1.8rem;font-weight:bold ;'>"+anlik+" kW</p>", unsafe_allow_html=True)
 
 
         with col2:
         
-            st.markdown("<p style='text-align: center; color: #e08a12;background-color:#f2f2f2;font-size: 1.3vw;font-weight:bold ;'>Bugün Toplam Üretim</p>", unsafe_allow_html=True)
-            st.markdown("<p style='text-align: center; color: #31333f;font-size: 1.8vw;font-weight:bold ;'>"+gunluk2+" kWh</p>", unsafe_allow_html=True)
+            st.markdown("<p style='text-align: center; color: #e08a12;background-color:#f2f2f2;font-size: 1.3rem;font-weight:bold ;'>Bugün Toplam Üretim</p>", unsafe_allow_html=True)
+            st.markdown("<p style='text-align: center; color: #31333f;font-size: 1.8rem;font-weight:bold ;'>"+gunluk2+" kWh</p>", unsafe_allow_html=True)
 
 
         with col3:
 
-            st.markdown("<p style='text-align: center; color: #e08a12;background-color:#f2f2f2;font-size: 1.3vw;font-weight:bold ;'>Aylık Ortalama Üretim</p>", unsafe_allow_html=True)
-            st.markdown("<p style='text-align: center; color: #31333f;font-size: 1.8vw;font-weight:bold ;'>"+aylik2+" kWh</p>", unsafe_allow_html=True)
+            st.markdown("<p style='text-align: center; color: #e08a12;background-color:#f2f2f2;font-size: 1.3rem;font-weight:bold ;'>Aylık Ortalama Üretim</p>", unsafe_allow_html=True)
+            st.markdown("<p style='text-align: center; color: #31333f;font-size: 1.8rem;font-weight:bold ;'>"+aylik2+" kWh</p>", unsafe_allow_html=True)
 
         with col4:
 
-            st.markdown("<p style='text-align: center; color: #e08a12;background-color:#f2f2f2;font-size: 1.3vw;font-weight:bold ;'>Yıllık Toplam Üretim</p>", unsafe_allow_html=True)
-            st.markdown("<p style='text-align: center; color: #31333f;font-size: 1.8vw;font-weight:bold ;'>"+yillik2+" kWh</p>", unsafe_allow_html=True)
+            st.markdown("<p style='text-align: center; color: #e08a12;background-color:#f2f2f2;font-size: 1.3rem;font-weight:bold ;'>Yıllık Toplam Üretim</p>", unsafe_allow_html=True)
+            st.markdown("<p style='text-align: center; color: #31333f;font-size: 1.8rem;font-weight:bold ;'>"+yillik2+" kWh</p>", unsafe_allow_html=True)
 
         st.markdown("<br><br><br>", unsafe_allow_html=True)
 
@@ -181,7 +191,7 @@ def write():
         tahmin_title_1ay = (datetime.date.today() - datetime.timedelta(days=0)).strftime("%B")
         tahmin_title_2gun = (datetime.date.today() + datetime.timedelta(days=3)).strftime("%d")
         tahmin_title_2ay = (datetime.date.today() + datetime.timedelta(days=3)).strftime("%B")
-        st.markdown("<p style='text-align: center; color: #31333f;font-size: 2.3vw;font-weight:bold ;'>4 Günlük Tahmini Üretim ("+tahmin_title_1gun+" "+str(weather.aycevir(tahmin_title_1ay))+" - "+tahmin_title_2gun+" "+str(weather.aycevir(tahmin_title_2ay))+")</p>", unsafe_allow_html=True)
+        st.markdown("<p style='text-align: center; color: #31333f;font-size: 2.3rem;font-weight:bold ;'>4 Günlük Tahmini Üretim ("+tahmin_title_1gun+" "+str(weather.aycevir(tahmin_title_1ay))+" - "+tahmin_title_2gun+" "+str(weather.aycevir(tahmin_title_2ay))+")</p>", unsafe_allow_html=True)
         st.markdown("<br>", unsafe_allow_html=True)
         colon0, colon1, colon2, colon3, colon4, colon5,  = st.columns([2,1,1,1,1,2])
 
@@ -192,10 +202,10 @@ def write():
         durum_tahmin1= weather.iconmain(icono_df_dort["icon"][120:][icono_df_dort["day"]==gun_tahmin1en][12:13].to_string(index=False))
         resim_tahmin1 = weather.icon(icono_df_dort["icon"][120:][icono_df_dort["day"]==gun_tahmin1en][12:13].to_string(index=False))
         with colon1:
-            st.markdown("<p style='text-align: center; color: #e08a12;background-color:#f2f2f2;font-size: 1.3vw;font-weight:bold ;'>{}</p>".format(gun_tahmin1), unsafe_allow_html=True)
+            st.markdown("<p style='text-align: center; color: #e08a12;background-color:#f2f2f2;font-size: 1.3rem;font-weight:bold ;'>{}</p>".format(gun_tahmin1), unsafe_allow_html=True)
             image = Image.open('images/'+resim_tahmin1+'.png')
             st.image(image,use_column_width=True,caption="{}".format(durum_tahmin1))
-            st.markdown("<p style='text-align: center; color: black;font-size: 1.8vw;font-weight:bold ;'>{} kWh</p>".format(uretim_tahmin1), unsafe_allow_html=True)
+            st.markdown("<p style='text-align: center; color: black;font-size: 1.8rem;font-weight:bold ;'>{} kWh</p>".format(uretim_tahmin1), unsafe_allow_html=True)
 
         gun_tahmin2 = weather.cevir((datetime.date.today() + datetime.timedelta(days=1)).strftime("%A"))
         gun_tahmin2en = (datetime.date.today() + datetime.timedelta(days=1)).strftime("%A")
@@ -204,10 +214,10 @@ def write():
         durum_tahmin2= weather.iconmain(icono_df_dort["icon"][120:][icono_df_dort["day"]==gun_tahmin2en][12:13].to_string(index=False))
         resim_tahmin2 = weather.icon(icono_df_dort["icon"][120:][icono_df_dort["day"]==gun_tahmin2en][12:13].to_string(index=False))
         with colon2:
-            st.markdown("<p style='text-align: center; color: #e08a12;background-color:#f2f2f2;font-size: 1.3vw;font-weight:bold ;'>{}</p>".format(gun_tahmin2), unsafe_allow_html=True)
+            st.markdown("<p style='text-align: center; color: #e08a12;background-color:#f2f2f2;font-size: 1.3rem;font-weight:bold ;'>{}</p>".format(gun_tahmin2), unsafe_allow_html=True)
             image = Image.open('images/'+resim_tahmin2+'.png')
             st.image(image,use_column_width=True,caption="{}".format(durum_tahmin2))
-            st.markdown("<p style='text-align: center; color: black;font-size: 1.8vw;font-weight:bold ;'>{} kWh</p>".format(uretim_tahmin2), unsafe_allow_html=True)
+            st.markdown("<p style='text-align: center; color: black;font-size: 1.8rem;font-weight:bold ;'>{} kWh</p>".format(uretim_tahmin2), unsafe_allow_html=True)
 
         gun_tahmin3 = weather.cevir((datetime.date.today() + datetime.timedelta(days=2)).strftime("%A"))
         gun_tahmin3en = (datetime.date.today() + datetime.timedelta(days=2)).strftime("%A") 
@@ -216,10 +226,10 @@ def write():
         durum_tahmin3= weather.iconmain(icono_df_dort["icon"][120:][icono_df_dort["day"]==gun_tahmin3en][12:13].to_string(index=False))
         resim_tahmin3 = weather.icon(icono_df_dort["icon"][120:][icono_df_dort["day"]==gun_tahmin3en][12:13].to_string(index=False))
         with colon3:
-            st.markdown("<p style='text-align: center; color: #e08a12;background-color:#f2f2f2;font-size: 1.3vw;font-weight:bold ;'>{}</p>".format(gun_tahmin3), unsafe_allow_html=True)
+            st.markdown("<p style='text-align: center; color: #e08a12;background-color:#f2f2f2;font-size: 1.3rem;font-weight:bold ;'>{}</p>".format(gun_tahmin3), unsafe_allow_html=True)
             image = Image.open('images/'+resim_tahmin3+'.png')
             st.image(image,use_column_width=True,caption="{}".format(durum_tahmin3))
-            st.markdown("<p style='text-align: center; color: black;font-size: 1.8vw;font-weight:bold ;'>{} kWh</p>".format(uretim_tahmin3), unsafe_allow_html=True)
+            st.markdown("<p style='text-align: center; color: black;font-size: 1.8rem;font-weight:bold ;'>{} kWh</p>".format(uretim_tahmin3), unsafe_allow_html=True)
 
         gun_tahmin4 = weather.cevir((datetime.date.today() + datetime.timedelta(days=3)).strftime("%A"))
         gun_tahmin4en = (datetime.date.today() + datetime.timedelta(days=3)).strftime("%A")
@@ -228,10 +238,10 @@ def write():
         durum_tahmin4= weather.iconmain(icono_df_dort["icon"][120:][icono_df_dort["day"]==gun_tahmin4en][12:13].to_string(index=False))
         resim_tahmin4 = weather.icon(icono_df_dort["icon"][120:][icono_df_dort["day"]==gun_tahmin4en][12:13].to_string(index=False))
         with colon4:
-            st.markdown("<p style='text-align: center; color: #e08a12;background-color:#f2f2f2;font-size: 1.3vw;font-weight:bold ;'>{}</p>".format(gun_tahmin4), unsafe_allow_html=True)
+            st.markdown("<p style='text-align: center; color: #e08a12;background-color:#f2f2f2;font-size: 1.3rem;font-weight:bold ;'>{}</p>".format(gun_tahmin4), unsafe_allow_html=True)
             image = Image.open('images/'+resim_tahmin4+'.png')
             st.image(image,use_column_width=True,caption="{}".format(durum_tahmin4))
-            st.markdown("<p style='text-align: center; color: black;font-size: 1.8vw;font-weight:bold ;'>{} kWh</p>".format(uretim_tahmin4), unsafe_allow_html=True)
+            st.markdown("<p style='text-align: center; color: black;font-size: 1.8rem;font-weight:bold ;'>{} kWh</p>".format(uretim_tahmin4), unsafe_allow_html=True)
 
 
         st.markdown("<br><br><br>", unsafe_allow_html=True)
@@ -247,20 +257,21 @@ def write():
         #fig2.update_xaxes(tickformat='%H')
 
         fig2.update_layout(
+            margin=dict(l=0, r=0, t=80, b=0),
             font=dict(
                 #family="sans-serif",
                 size=18,
                 color="#000000"
             ), 
-            xaxis_tickangle=0,
+            #xaxis_tickangle=0,
             xaxis_tickmode="linear", 
             xaxis_title='Saatler',
             yaxis_title='Üretim (kWh)',
-
+            height =350,
             title=dict(
                 text='<b>Saatlik Üretim (kWh)</b>',
                 x=0.5,
-                y=0.95,
+                y=0.98,
                 font=dict(
                     #family="Arial",
                     size=35,
@@ -270,13 +281,13 @@ def write():
                 legend=dict(
             orientation="h",
             yanchor="bottom",
-            y=1.02,
+            y=1,
             xanchor="right",
             x=1
         ))
 
         st.plotly_chart(fig2,use_container_width=True)
-        
+        st.markdown("<br><br><br>",unsafe_allow_html=True)
         
         aylik = ready.groupby(ready["dt_obj"][ready["month"]==month_now].dt.day).sum().reset_index() / 3
         aylikort = ready.groupby(ready["dt_obj"][ready["month"]==month_now].dt.day).sum().reset_index() / 3
@@ -292,7 +303,7 @@ def write():
             text=round(aylik["Generation"]*oran,0),
             texttemplate='%{text:.2s}',
             textfont_size=13,
-            textposition="outside",
+            textposition="inside",
             cliponaxis=False,
             textangle = 0
         ))
@@ -308,15 +319,16 @@ def write():
         #fig.update_traces(textfont_size=12,  textposition="outside", cliponaxis=False)
         # Here we modify the tickangle of the xaxis, resulting in rotated labels.
         fig.update_layout(
+            margin=dict(l=0, r=0, t=80, b=0),
             font=dict(
                 #family="sans-serif",
                 size=18,
                 color="#31333f"
             ),barmode='group', 
-            xaxis_tickangle=0,
+            #xaxis_tickangle=0,
             xaxis_title='Günler',
             yaxis_title='Üretim (kWh)',
-            
+            height =350,
 
             title=dict(
                 text='<b>'+weather.aycevir(month_name_now)+' Ayı Günlük Üretim (kWh)</b>',
@@ -330,12 +342,12 @@ def write():
             legend=dict(
             orientation="h",
             yanchor="bottom",
-            y=1.02,
+            y=1,
             xanchor="right",
             x=1)
                 )
         st.plotly_chart(fig,use_container_width=True)
-
+        st.markdown("<br><br><br>",unsafe_allow_html=True)
 
         yillik = ready.groupby(ready["dt_obj"].dt.month).sum().reset_index() / 3
         months = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
@@ -352,25 +364,26 @@ def write():
        
         # Here we modify the tickangle of the xaxis, resulting in rotated labels.
         fig.update_layout(
-            font=dict(
+            margin=dict(l=0, r=0, t=80, b=0),
+            font=dict( 
                 #family="sans-serif",
                 size=18,
                 color="#000000"
             ),barmode='group', 
-            xaxis_tickangle=0,
+            #xaxis_tickangle=0,
             xaxis_title='Aylar',
             yaxis_title='Üretim (kWh)',
-
+            height =350,
             title=dict(
                 text='<b>Aylık Üretim (kWh)</b>',
                 x=0.5,
-                y=0.95,
+                y=0.98,
                 font=dict(
                     #family="Arial",
                     size=35,
                     color='#31333f'
                 ))
-                ,uniformtext_minsize=35)
+                )
         st.plotly_chart(fig,use_container_width=True)
     else:
         st.subheader(" ")
