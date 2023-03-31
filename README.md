@@ -4,7 +4,7 @@
 
 Demo verilerle geçmiş zaman aralıklarındaki üretim verilerinin görselleştirilmesi ve analizi mevcut.
 
-Projeye linkten ulaşabilirsiniz [Solarforecast](https://solarforecast.herokuapp.com/).
+Projeye linkten ulaşabilirsiniz [Solarforecast](https://solarforecast.herokuapp.com/). (API ücretsiz deneme süresi dolduğu için artık çalışmıyor)
 <p>&nbsp;</p>
 
 ### Kullanılan Araçlar ve Kütüphaneler
